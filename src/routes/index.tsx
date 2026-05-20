@@ -1,5 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { PROJECTS } from "@/data/projects";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -44,45 +46,6 @@ const EDUCATION = [
   },
 ];
 
-const PROJECTS = [
-  {
-    tags: ["Laravel", "Vue.js"],
-    title: "School Management SaaS Platform",
-    summary: "A multi-tenant school administration system handling student data, attendance, and fee management.",
-    bullets: [
-      "Architected multi-tenant database structure for data isolation.",
-      "Integrated secure payment gateway for automated tuition collection.",
-    ],
-  },
-  {
-    tags: ["React", "Node.js", "OpenAI"],
-    title: "Client Scope & AI Change Order System",
-    summary: "Intelligent system for project management that automates change request processing using AI.",
-    bullets: [
-      "Automated scope-creep detection via natural language processing.",
-      "Real-time cost estimation for project adjustments.",
-    ],
-  },
-  {
-    tags: ["TypeScript", "Python"],
-    title: "AI-to-Kanban Workflow Tool",
-    summary: "Converts unstructured meeting notes and audio into actionable Kanban board tasks.",
-    bullets: [
-      "Speech-to-text integration with task categorization.",
-      "Automated priority assignment based on semantic analysis.",
-    ],
-  },
-  {
-    tags: ["PHP", "MySQL", "TMDB API"],
-    title: "Movie Management App",
-    summary: "A personal media catalog tool for tracking watched content and receiving recommendations.",
-    bullets: [
-      "Integrated TMDB API for rich metadata fetching.",
-      "Custom watchlist and user rating system.",
-    ],
-  },
-];
-
 const CONTACT = [
   { label: "Email", value: "iraamaneyahya@gmail.com", href: "mailto:iraamaneyahya@gmail.com" },
   { label: "LinkedIn", value: "in/yahya-iraamane", href: "https://linkedin.com/in/yahya-iraamane" },
@@ -97,9 +60,7 @@ function Portfolio() {
   useEffect(() => {
     const obs = new IntersectionObserver(
       (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive(e.target.id);
-        });
+        entries.forEach((e) => { if (e.isIntersecting) setActive(e.target.id); });
       },
       { rootMargin: "-40% 0px -55% 0px" }
     );
@@ -127,12 +88,15 @@ function Portfolio() {
               </a>
             ))}
           </nav>
-          <a
-            href="#contact"
-            className="hidden md:inline-flex items-center gap-2 rounded-full border hairline px-4 py-1.5 text-xs font-medium hover:bg-foreground hover:text-background transition-colors"
-          >
-            <Icon name="download" className="!text-base" /> Download CV
-          </a>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <a
+              href="#contact"
+              className="hidden md:inline-flex items-center gap-2 rounded-full border hairline px-4 py-1.5 text-xs font-medium hover:bg-foreground hover:text-background transition-colors"
+            >
+              <Icon name="download" className="!text-base" /> Download CV
+            </a>
+          </div>
         </div>
       </header>
 
@@ -208,8 +172,10 @@ function Portfolio() {
       <Section id="projects" number="03" title="Projects">
         <div className="grid md:grid-cols-2 gap-px bg-[var(--color-hairline)] border hairline">
           {PROJECTS.map((p) => (
-            <article
-              key={p.title}
+            <Link
+              key={p.slug}
+              to="/projects/$slug"
+              params={{ slug: p.slug }}
               className="group bg-background p-8 md:p-10 flex flex-col gap-6 hover:bg-surface transition-colors"
             >
               <div className="flex items-center gap-2 flex-wrap">
@@ -228,12 +194,12 @@ function Portfolio() {
                 ))}
               </ul>
               <div className="mt-auto pt-4">
-                <button className="inline-flex items-center gap-2 label-mono group/btn">
+                <span className="inline-flex items-center gap-2 label-mono">
                   Case Study
-                  <Icon name="arrow_forward" className="!text-base transition-transform group-hover/btn:translate-x-1" />
-                </button>
+                  <Icon name="arrow_forward" className="!text-base transition-transform group-hover:translate-x-1" />
+                </span>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </Section>
