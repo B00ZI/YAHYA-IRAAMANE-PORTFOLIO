@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { getProject, PROJECTS } from "@/data/projects";
+import { getProject, PROJECTS, type Project } from "@/data/projects";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 export const Route = createFileRoute("/projects/$slug")({
@@ -40,7 +40,7 @@ const Icon = ({ name, className = "" }: { name: string; className?: string }) =>
 );
 
 function ProjectDetail() {
-  const { project } = Route.useLoaderData();
+  const { project } = Route.useLoaderData() as { project: Project };
   const idx = PROJECTS.findIndex((p) => p.slug === project.slug);
   const next = PROJECTS[(idx + 1) % PROJECTS.length];
   const prev = PROJECTS[(idx - 1 + PROJECTS.length) % PROJECTS.length];
