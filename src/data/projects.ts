@@ -10,7 +10,8 @@ export type Project = {
   status: string;
   overview: string;
   challenge: string;
-  approach: string[];
+  stackChoices: { title: string; desc: string }[];
+  approach: { title: string; desc: string }[];
   outcomes: { label: string; value: string }[];
   stack: string[];
 };
@@ -18,127 +19,215 @@ export type Project = {
 export const PROJECTS: Project[] = [
   {
     slug: "school-management-saas",
-    tags: ["Laravel", "Vue.js"],
+    tags: ["Laravel", "Next.js", "MySQL"],
     title: "School Management SaaS Platform",
     summary:
-      "A multi-tenant school administration system handling student data, attendance, and fee management.",
+      "I built a full-stack platform to handle school data, replace messy spreadsheets, and keep student, teacher, and admin data secure.",
     bullets: [
-      "Architected multi-tenant database structure for data isolation.",
-      "Integrated secure payment gateway for automated tuition collection.",
+      "Created independent dashboards for students, teachers, and admins with different access controls.",
+      "Designed a database with over 10 connected tables to keep track of attendance, grades, and payments smoothly.",
     ],
     year: "2024",
-    role: "Lead Full Stack Developer",
-    client: "Private K-12 network",
-    status: "Production · 12 schools",
+    role: "Full Stack Developer",
+    client: "Morocco-focused education provider",
+    status: "Production",
     overview:
-      "A SaaS platform that gives independent schools a single source of truth for students, staff, attendance, grading, and tuition. Each school operates inside an isolated tenant with its own branding, users, and data.",
+      "A complete web platform built for a school provider to manage daily workloads like recording attendance, organizing student profiles, and processing payments.",
     challenge:
-      "Schools were stitching together spreadsheets, paper attendance sheets, and offline accounting. We needed a system that scaled across institutions without leaking data between tenants — and that non-technical staff could actually use day-to-day.",
+      "The school relied heavily on slow, manual spreadsheets. They needed a secure, central system that could handle different user roles without getting messy or leaking sensitive student records.",
+    stackChoices: [
+      {
+        title: "Why Next.js + Headless Laravel?",
+        desc: "I used Laravel strictly as a backend API because it handles complex user roles and relational data out of the box. Pairing it with Next.js means the dashboard loads instantly for users without slowing down the server."
+      },
+      {
+        title: "Why MySQL?",
+        desc: "Since school data (grades, attendance, payments) is highly structured and connects together, a classic relational database was the safest choice to keep everything accurate and synchronized."
+      }
+    ],
     approach: [
-      "Designed a single-database, schema-per-tenant model in PostgreSQL with row-level guards on the application layer.",
-      "Built a role-based permission system covering admin, teacher, accountant, and parent personas.",
-      "Integrated a local payment gateway with webhook reconciliation for automated tuition invoicing.",
-      "Shipped a Vue 3 dashboard with offline-tolerant attendance capture for classrooms with weak Wi-Fi.",
+      {
+        title: "Data Isolation Middleware",
+        desc: "I wrote a check that runs on every single request to make sure a school can only see its own students, blocking any accidental data leaks between accounts."
+      },
+      {
+        title: "Custom Role System",
+        desc: "Built a permission rulebook that changes what you see based on who logs in—giving full control to admins, grading tools to teachers, and read-only views to parents."
+      },
+      {
+        title: "Relational Data Mapping",
+        desc: "Linked tables carefully so when a teacher marks a student absent, it instantly updates the attendance summary and reports without breaking other logs."
+      },
+      {
+        title: "Background Report Processing",
+        desc: "Generating huge report PDFs can freeze the app. I moved this work to a background queue so users can keep clicking around while the files build."
+      }
     ],
     outcomes: [
-      { label: "Schools onboarded", value: "12" },
-      { label: "Manual admin time saved", value: "~60%" },
-      { label: "Tuition collection cycle", value: "14 → 3 days" },
+      { label: "Database Tables", value: "10+" },
+      { label: "Lighthouse Score", value: "90+" },
+      { label: "Core Systems", value: "Attendance, Grades, Payments" },
     ],
-    stack: ["Laravel", "Vue.js", "PostgreSQL", "Redis", "Stripe-compatible Gateway"],
+    stack: ["Laravel", "Next.js", "MySQL", "RESTful APIs", "TailwindCSS"],
   },
   {
     slug: "ai-change-order-system",
-    tags: ["React", "Node.js", "OpenAI"],
-    title: "Client Scope & AI Change Order System",
+    tags: ["Next.js", "Laravel", "PostgreSQL"],
+    title: "Client Scope & Change Order System",
     summary:
-      "Intelligent system for project management that automates change request processing using AI.",
+      "I built a tool that uses AI to read unstructured client messages and automatically turn them into clean project requirements and cost estimates.",
     bullets: [
-      "Automated scope-creep detection via natural language processing.",
-      "Real-time cost estimation for project adjustments.",
+      "Built an AI parsing layer that reads through a client request and guesses the needed budget and timeframe.",
+      "Created a simple approve/reject system that sends out automatic confirmation emails once a proposal is accepted.",
     ],
     year: "2024",
     role: "Full Stack Developer",
     client: "Boutique digital agency",
-    status: "In production",
+    status: "Production",
     overview:
-      "A project operations layer that sits between client conversations and the team's delivery board. When clients ask for something new, the system detects whether it's in or out of scope, drafts a change order, and estimates impact on timeline and budget.",
+      "An automation tool designed for project teams to easily handle scope adjustments without wasting hours manual-drafting contract revisions.",
     challenge:
-      "Agencies bled hours on undocumented scope changes. PMs were the human bottleneck — reading every Slack and email, manually pricing change orders, and chasing approvals.",
+      "Clients constantly text or email new requests, and teams waste too much time manually sizing up scope changes, creating friction and slow reply times.",
+    stackChoices: [
+      {
+        title: "Why Next.js App Router?",
+        desc: "AI features take time to think and reply. Next.js let me stream AI responses to the screen in real-time while processing heavy document uploads smoothly in the background."
+      },
+      {
+        title: "Why PostgreSQL?",
+        desc: "AI models hand back messy, unstructured JSON data. Postgres gives me the perfect mix: it handles standard user accounts easily, but can also search through messy JSON blobs super fast."
+      }
+    ],
     approach: [
-      "Built a Node.js ingestion pipeline that streams client messages from email and chat into a normalized event log.",
-      "Used OpenAI function calling to classify each request against the signed Statement of Work.",
-      "Generated structured change orders with cost, hours, and timeline deltas — sent to the client for one-click approval.",
-      "React dashboard for PMs with audit trail, override controls, and revenue-at-risk reporting.",
+      {
+        title: "Contract Text Parser",
+        desc: "Wrote a utility helper that reads raw, messy text documents from the user and cleans it up into predictable data structures that the AI can actually read."
+      },
+      {
+        title: "Async Upload Queues",
+        desc: "Set up a queue worker system to process huge contract uploads in order. If a file takes a few minutes, the UI stays fully responsive."
+      },
+      {
+        title: "AI Response Flattening",
+        desc: "Created data filters to take complex nested objects from the AI and flatten them down so they layout nicely on the front-end dashboard cards."
+      },
+      {
+        title: "Final Signature Lockout",
+        desc: "Added strict conditional checks to the database to freeze documents once they are signed, ensuring nobody can edit a change order after approval."
+      }
     ],
     outcomes: [
-      { label: "Scope creep recovered", value: "+18% revenue" },
-      { label: "Change order turnaround", value: "3 days → 4 hours" },
-      { label: "PM hours reclaimed", value: "~9 hrs/week" },
+      { label: "Client Proposals", value: "Automated Workflow" },
+      { label: "Lighthouse Score", value: "90+" },
+      { label: "Main Feature", value: "Status & Notifications" },
     ],
-    stack: ["React", "Node.js", "OpenAI", "PostgreSQL", "Tailwind"],
+    stack: ["Next.js", "Laravel", "PostgreSQL", "AI APIs", "REST APIs"],
   },
   {
     slug: "ai-kanban-workflow",
-    tags: ["TypeScript", "Python"],
+    tags: ["Next.js"],
     title: "AI-to-Kanban Workflow Tool",
     summary:
-      "Converts unstructured meeting notes and audio into actionable Kanban board tasks.",
+      "I built a productivity tool that takes text responses from an AI and instantly formats them into interactive, drag-and-drop Kanban task boards.",
     bullets: [
-      "Speech-to-text integration with task categorization.",
-      "Automated priority assignment based on semantic analysis.",
+      "Wrote a JSON parsing system to slice AI text and generate clean, move-able task cards.",
+      "Set up local storage persistence so users don't lose their boards or tasks when they refresh.",
     ],
     year: "2023",
     role: "Solo Builder",
     client: "Self-initiated",
-    status: "Public beta",
+    status: "Public Beta",
     overview:
-      "A tool that turns a 45-minute kickoff call into a populated Kanban board. Upload the recording, get back assignees, priorities, and acceptance criteria — ready to push into Linear, Jira, or Trello.",
+      "A handy mini-app that bridges the gap between brainstorming with an AI tool and actually starting to work on tasks.",
     challenge:
-      "Teams leave meetings aligned but lose half the decisions in the gap between conversation and ticket. Manually translating notes into tickets is the most-skipped step in every workflow.",
+      "AI models generate great to-do lists, but copying and pasting text bullet-by-bullet into a project manager is tedious and disruptive to the workflow.",
+    stackChoices: [
+      {
+        title: "Why 100% Client-Side Next.js?",
+        desc: "I wanted this tool to be incredibly fast. By skipping a traditional backend database and handling all data logic directly inside the browser, moving cards feels instant and costs nothing to host."
+      },
+      {
+        title: "Why LocalStorage?",
+        desc: "Without a remote cloud database, LocalStorage was the simplest way to save the user's board layout automatically so their cards don't disappear when they refresh the page."
+      }
+    ],
     approach: [
-      "Python service handles transcription with diarized speakers and timestamped segments.",
-      "TypeScript orchestrator extracts tasks, owners, due dates, and dependencies via structured prompts.",
-      "Heuristic + LLM hybrid for priority — keyword urgency signals combined with semantic intent.",
-      "Two-way sync adapters for Linear, Jira, and Trello so the board stays live.",
+      {
+        title: "Optimistic State Swaps",
+        desc: "When you drop a card into a new column, the UI updates instantly before asking questions. This keeps the drag animation buttery smooth."
+      },
+      {
+        title: "State Serialization Hooks",
+        desc: "Wrote a React hook that automatically saves the exact layout of columns and cards into the browser storage every time a card changes positions."
+      },
+      {
+        title: "In-Browser Data Shuffling",
+        desc: "Used standard JavaScript array functions (like map and filter) to sort and move cards in memory, keeping everything fast without network lag."
+      },
+      {
+        title: "Save-Action Debouncer",
+        desc: "Instead of saving to the browser storage on every single pixel movement, I added a tiny delay so it only saves once the user lets go of the card."
+      }
     ],
     outcomes: [
-      { label: "Tasks captured per meeting", value: "3× baseline" },
-      { label: "Post-meeting admin time", value: "~22 → 4 min" },
-      { label: "Beta teams active", value: "40+" },
+      { label: "Task Source", value: "AI JSON Outputs" },
+      { label: "Board Feel", value: "Snappy & Real-time" },
+      { label: "Data Saving", value: "Local Storage" },
     ],
-    stack: ["TypeScript", "Python", "Whisper", "OpenAI", "Next.js"],
+    stack: ["Next.js", "JavaScript", "Local Storage", "TailwindCSS"],
   },
   {
     slug: "movie-management-app",
-    tags: ["PHP", "MySQL", "TMDB API"],
+    tags: ["React.js", "Supabase"],
     title: "Movie Management App",
     summary:
-      "A personal media catalog tool for tracking watched content and receiving recommendations.",
+      "I built a movie library application using Supabase for user accounts and an external API to let users search, filter, and save films.",
     bullets: [
-      "Integrated TMDB API for rich metadata fetching.",
-      "Custom watchlist and user rating system.",
+      "Connected an external movie database to build a fast dashboard with search and custom genre filters.",
+      "Added search debouncing to stop spamming the database, reducing unnecessary API requests by 60%.",
     ],
     year: "2023",
     role: "Solo Builder",
     client: "Personal project",
     status: "Shipped",
     overview:
-      "A self-hosted library for film obsessives. Track what you've watched, rate it, build themed lists, and get recommendations that learn from your taste — not from what a platform wants to promote.",
+      "A clean personal content log where people can sign up, create profiles, track what they watch, and discover new movies.",
     challenge:
-      "Streaming-platform watchlists are siloed, lossy, and tuned for retention rather than recall. I wanted my own catalog with honest recommendations.",
+      "Most mainstream media tracking tools feel cluttered with ads or have restrictive interfaces, so I wanted to make a clean, lightweight personal catalog.",
+    stackChoices: [
+      {
+        title: "Why Supabase?",
+        desc: "Instead of wasting time writing custom signup flows, passwords, and user tables from scratch, I let Supabase handle the boring auth stuff so I could focus on building the actual app features."
+      },
+      {
+        title: "Why External Film APIs?",
+        desc: "To keep the app lightweight and packed with real movies, I pulled data from public movie databases on the fly instead of trying to scrape and host thousands of movies myself."
+      }
+    ],
     approach: [
-      "PHP backend with MySQL for the catalog, ratings, and tag taxonomy.",
-      "TMDB API for posters, cast, runtime, and release metadata with local caching.",
-      "Recommendation engine based on tag co-occurrence and weighted rating proximity.",
-      "Clean responsive UI for adding films in two clicks from any device.",
+      {
+        title: "Supabase Auth Guard",
+        desc: "Created routing middleware to protect private profile pages, kicking out unauthenticated users and routing logged-in users straight to their lists."
+      },
+      {
+        title: "Smart Search Debounce",
+        desc: "Added a short timer to the search bar. The app waits until you finish typing before hitting the movie database, cutting out hundreds of useless API calls."
+      },
+      {
+        title: "Background Revalidation Cache",
+        desc: "Set up a caching system that displays your saved movies instantly from memory first, then quietly updates the data in the background if anything changed."
+      },
+      {
+        title: "Lazy-Loaded Movie Posters",
+        desc: "Programmed movie images to load only when they roll onto the user's screen. This saves internet bandwidth and keeps scrolling fast on mobile devices."
+      }
     ],
     outcomes: [
-      { label: "Films cataloged", value: "1,200+" },
-      { label: "Recommendation click-through", value: "~45%" },
-      { label: "Daily logging time", value: "< 30 sec" },
+      { label: "API Optimization", value: "~60% fewer requests" },
+      { label: "User Profiles", value: "Supabase Auth" },
+      { label: "App Speed", value: "Cached & Lazy-loaded" },
     ],
-    stack: ["PHP", "MySQL", "TMDB API", "Vanilla JS"],
+    stack: ["React.js", "Supabase", "External Movie API", "JavaScript"],
   },
 ];
 

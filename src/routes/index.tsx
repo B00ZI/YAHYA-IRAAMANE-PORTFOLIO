@@ -23,35 +23,48 @@ const NAV = [
   { id: "contact", label: "Contact", icon: "mail" },
 ];
 
-const TECH = ["Next.js", "React", "TypeScript", "Python", "Laravel", "Node.js", "PostgreSQL", "MySQL"];
+const TECH = [
+  "JavaScript",
+  "TypeScript",
+  "PHP",
+  "Python",
+  "SQL",
+  "React.js",
+  "Next.js",
+  "Laravel",
+  "PostgreSQL",
+  "MySQL",
+];
 
 const EDUCATION = [
+      {
+   school: "Self-Taught",
+   status: "2023 - Present",
+   title: "Full-Stack Web Development",
+   desc: "Driven by a genuine interest in web development and continuous learning. Constantly exploring new technologies, refining my skills, and figuring out how things work under the hood by building real projects.",
+  },
   {
-    school: "ESET",
-    status: "Graduated",
+    school: "ESET, Marrakesh",
+    status: "10/2024 - 09/2026",
     title: "Specialized Technician in Computer Science",
-    desc: "Core focus on software engineering, database management, and networking fundamentals.",
+    desc: "Relevant Coursework: Full-Stack Web Development, Python, Databases, Algorithms, Computer Networks.",
   },
+
   {
-    school: "Online Resources",
-    status: "2023 — Present",
-    title: "Self-Taught Web Developer",
-    desc: "Deep dive into modern frontend frameworks, responsive design patterns, and full-stack architecture through project-based learning.",
-  },
-  {
-    school: "Almoohdin High School",
-    status: "Secondary Education",
+    school: "High School, Marrakesh",
+    status: "10/2022 - 07/2023",
     title: "Baccalaureate in Physics & Chemistry",
-    desc: "Emphasis on analytical thinking and mathematical problem-solving.",
+    desc: "Focused on analytical problem solving, physics, and chemistry fundamentals.",
   },
 ];
 
 const CONTACT = [
   { label: "Email", value: "iraamaneyahya@gmail.com", href: "mailto:iraamaneyahya@gmail.com" },
+  { label: "Phone", value: "+212 771 887 838", href: "tel:+212771887838" },
   { label: "LinkedIn", value: "in/yahya-iraamane", href: "https://linkedin.com/in/yahya-iraamane" },
+  { label: "GitHub", value: "github/B00ZI", href: "https://github.com/B00ZI" },
   { label: "X", value: "@yahya-iraamane", href: "https://x.com/yahya-iraamane" },
-  { label: "GitHub", value: "github/iraamane", href: "https://github.com/iraamane" },
-  { label: "WhatsApp", value: "+212 600 000000", href: "https://wa.me/212600000000" },
+  { label: "WhatsApp", value: "+212 631 125 909", href: "https://wa.me/212631125909" },
 ];
 
 function Portfolio() {
@@ -76,7 +89,7 @@ function Portfolio() {
       {/* Top bar */}
       <header className="fixed top-0 left-0 right-0 z-40 backdrop-blur-xl bg-background/70 border-b hairline">
         <div className="mx-auto max-w-7xl px-6 md:px-10 h-14 flex items-center justify-between">
-          <a href="#top" className="label-mono">Y. Iraamane</a>
+          <a href="#top" className="label-mono">y.Iraamane</a>
           <nav className="hidden md:flex items-center gap-8">
             {NAV.map((n, i) => (
               <a
@@ -91,7 +104,8 @@ function Portfolio() {
           <div className="flex items-center gap-2">
             <ThemeToggle />
             <a
-              href="#contact"
+              href="/Yahya-Iraamane-CV.pdf"
+              download="Yahya-Iraamane-CV.pdf"
               className="hidden md:inline-flex items-center gap-2 rounded-full border hairline px-4 py-1.5 text-xs font-medium hover:bg-foreground hover:text-background transition-colors"
             >
               <Icon name="download" className="!text-base" /> Download CV
@@ -104,20 +118,22 @@ function Portfolio() {
       <section id="top" className="relative pt-32 pb-24 md:pt-44 md:pb-40 px-6 md:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="label-mono text-muted-foreground mb-8 flex items-center gap-3">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
-            Available for select engagements — 2026
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
+            Open to new opportunities
           </div>
           <h1 className="font-display text-[14vw] md:text-[10rem] leading-[0.85] tracking-[-0.05em]">
             YAHYA
             <br />
-            <span className="italic font-light">Iraamane</span>
+            <span className="italic font-light">Iraamane.</span>
           </h1>
           <div className="mt-12 grid md:grid-cols-12 gap-8">
             <div className="md:col-span-5 md:col-start-7">
               <p className="text-lg md:text-xl text-foreground/80 leading-relaxed">
-                Full Stack Developer. I build end-to-end web applications and SaaS products that marry bulletproof backend logic with fast, responsive user interfaces.
+               I’m a full-stack developer who builds web apps and SaaS platforms from the database schema up to the user interface. I mostly work with Next.js and Laravel, focusing on clean code, secure APIs, and building fast, highly responsive experiences.
               </p>
-              <p className="mt-6 label-mono text-muted-foreground">Based in Marrakesh, Morocco</p>
+                <p className="mt-6 label-mono text-muted-foreground">
+                Marrakesh, Morocco
+              </p>
             </div>
           </div>
         </div>
@@ -128,11 +144,13 @@ function Portfolio() {
         <div className="grid md:grid-cols-12 gap-10">
           <div className="md:col-span-7">
             <h3 className="font-display text-3xl md:text-5xl leading-tight tracking-tight">
-              Bridging technical complexity with intuitive design.
+            Turning ideas into working solutions.
             </h3>
             <p className="mt-8 max-w-2xl text-foreground/75 leading-relaxed">
-              I am a Full-Stack Developer with a focus on creating efficient, scalable, and user-centric web applications. My expertise spans from architecting robust backends using Laravel and PHP to building dynamic frontends with React and Vue.js. I thrive in environments that challenge me to solve complex problems through clean, maintainable code.
-            </p>
+            I find problems to solve from my own daily life or from what I see people talking about online. By using AI to handle the heavy lifting, I can quickly turn those ideas into real, working software.
+
+    My tech choice depends on the project. I use Next.js for frontends, Laravel or Node.js for backend logic, and Supabase to spin up user accounts and databases quickly. I focus on finding the right tool for the problem and just building it.
+           </p>
           </div>
           <div className="md:col-span-5">
             <div className="label-mono text-muted-foreground mb-5">Tech Stack</div>
@@ -180,7 +198,7 @@ function Portfolio() {
             >
               <div className="flex items-center gap-2 flex-wrap">
                 {p.tags.map((t) => (
-                  <span key={t} className="label-mono text-muted-foreground">{t}</span>
+                  <span key={t} className="label-mono text-muted-foreground border rounded-2xl p-1 px-3" >{t}</span>
                 ))}
               </div>
               <h4 className="font-display text-2xl md:text-3xl leading-tight">{p.title}</h4>
@@ -195,7 +213,7 @@ function Portfolio() {
               </ul>
               <div className="mt-auto pt-4">
                 <span className="inline-flex items-center gap-2 label-mono">
-                  Case Study
+                  View Project
                   <Icon name="arrow_forward" className="!text-base transition-transform group-hover:translate-x-1" />
                 </span>
               </div>
@@ -207,7 +225,7 @@ function Portfolio() {
       {/* Contact */}
       <Section id="contact" number="04" title="Contact">
         <h3 className="font-display text-4xl md:text-7xl leading-[0.95] tracking-tight max-w-4xl">
-          Let's build something <span className="italic font-light">end-to-end.</span>
+          Have an idea?  <span className="italic font-light">Let's build it.</span>
         </h3>
         <div className="mt-14 grid md:grid-cols-2 gap-px bg-[var(--color-hairline)] border-y hairline">
           {CONTACT.map((c) => (
@@ -227,14 +245,14 @@ function Portfolio() {
       </Section>
 
       {/* Footer */}
-      <footer className="px-6 md:px-10 pt-24 pb-32 md:pb-16">
+      <footer className="px-6 md:px-10 pt-20 pb-32 md:pb-6">
         <div className="mx-auto max-w-7xl">
           <div className="font-display text-[12vw] md:text-[8rem] leading-[0.85] tracking-[-0.05em]">
             IRAAMANE<span className="text-accent">.</span>
           </div>
           <div className="mt-10 pt-6 border-t hairline flex flex-col md:flex-row md:justify-between gap-3 label-mono text-muted-foreground">
             <span>© 2026 Yahya Iraamane — All rights reserved</span>
-            <span>Full stack rigor · Marrakesh, Morocco</span>
+            <span>Full stack developer  · Marrakesh · Morocco</span>
           </div>
         </div>
       </footer>
@@ -260,10 +278,10 @@ function Section({ id, number, title, children }: { id: string; number: string; 
   return (
     <section id={id} className="px-6 md:px-10 py-24 md:py-36 border-t hairline scroll-mt-20">
       <div className="mx-auto max-w-7xl">
-        <div className="label-mono text-muted-foreground mb-12 flex items-center gap-4">
-          <span>{number}</span>
-          <span className="h-px w-12 bg-[var(--color-hairline)]" />
-          <span>{title}</span>
+        <div className="label-mono  text-muted-foreground mb-12 flex items-center gap-4">
+          <span className="text-lg">{number}</span>
+          <span className="h-px w-12  bg-[var(--color-hairline)]" />
+          <span className="text-lg">{title}</span>
         </div>
         {children}
       </div>
