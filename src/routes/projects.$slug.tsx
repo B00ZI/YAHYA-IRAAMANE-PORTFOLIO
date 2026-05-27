@@ -24,7 +24,9 @@ export const Route = createFileRoute("/projects/$slug")({
       <div className="text-center">
         <div className="label-mono text-muted-foreground">404</div>
         <h1 className="font-display text-4xl mt-3">Project not found</h1>
-        <Link to="/" className="mt-6 inline-block label-mono underline">Back to portfolio</Link>
+        <Link to="/" className="mt-6 inline-block label-mono underline">
+          Back to portfolio
+        </Link>
       </div>
     </div>
   ),
@@ -45,9 +47,9 @@ function ProjectDetail() {
   const next = PROJECTS[(idx + 1) % PROJECTS.length];
   const prev = PROJECTS[(idx - 1 + PROJECTS.length) % PROJECTS.length];
 
-  const demoUrl = "#"; 
+  const demoUrl = "#";
   const repoUrl = "https://github.com/BOOZI";
-  const projectImage = `/images/projects/${project.slug}.png`; 
+  const projectImage = `/images/projects/${project.slug}.png`;
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background">
@@ -58,7 +60,9 @@ function ProjectDetail() {
             <Icon name="arrow_back" className="!text-base" /> Back to portfolio
           </Link>
           <nav className="hidden md:flex items-center gap-3 label-mono text-muted-foreground">
-            <Link to="/" hash="projects" className="hover:text-foreground">Projects</Link>
+            <Link to="/" hash="projects" className="hover:text-foreground">
+              Projects
+            </Link>
             <span>/</span>
             <span className="text-foreground">{project.title}</span>
           </nav>
@@ -71,7 +75,10 @@ function ProjectDetail() {
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-wrap items-center gap-3 mb-8">
             {project.tags.map((t) => (
-              <span key={t} className="label-mono text-muted-foreground border hairline rounded-full px-3 py-1">
+              <span
+                key={t}
+                className="label-mono text-muted-foreground border hairline rounded-full px-3 py-1"
+              >
                 {t}
               </span>
             ))}
@@ -122,41 +129,57 @@ function ProjectDetail() {
         </div>
       </section>
 
-      {/* STEP 1: Context */}
-      <Block number="01" title="Context">
-        <div className="grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-20 items-start">
-          <div className="space-y-12">
-            <div className="space-y-4">
-              <div className="label-mono text-xs text-muted-foreground tracking-widest uppercase">Overview</div>
-              <p className="text-xl md:text-3xl leading-relaxed text-foreground/85 font-display tracking-tight font-light">
-                {project.overview}
-              </p>
-            </div>
-            
-            <div className="space-y-4 pt-8 border-t hairline border-[var(--color-hairline)]/40">
-              <div className="label-mono text-xs text-muted-foreground tracking-widest uppercase">The Challenge</div>
-              <p className="text-base md:text-lg text-foreground/75 leading-relaxed font-light">
-                {project.challenge}
-              </p>
-            </div>
-          </div>
-          
-          <div className="border hairline border-[var(--color-hairline)] p-2 bg-surface/20 rounded-lg w-full aspect-video lg:aspect-[4/3] relative overflow-hidden group lg:sticky lg:top-24">
-            <img
-              src={projectImage}
-              alt={`${project.title} Interface`}
-              className="w-full h-full object-cover object-top rounded grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-            />
-          </div>
+    {/* STEP 1: Context (Balanced Problem & Solution) */}
+<Block number="01" title="Context">
+  <div className="grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-20 items-start">
+    <div className="space-y-10">
+      
+      {/* The Problem */}
+      <div className="space-y-3">
+        <div className="flex items-center gap-2 text-muted-foreground">
+          <Icon name="warning" className="!text-base  text-red-500" />
+          <span className="label-mono text-xs tracking-widest uppercase">The Challenge</span>
         </div>
-      </Block>
+        <p className="text-xl md:text-2xl leading-relaxed text-foreground/90  tracking-tight ">
+          {project.challenge}
+        </p>
+      </div>
+      
+      <div className="h-px bg-[var(--color-hairline)]/60" />
+      
+      {/* The Solution - Now equally big, bold, and highlighted */}
+      <div className="space-y-3">
+        <div className="flex items-center gap-2 text-foreground">
+          <Icon name="check_circle" className="!text-base  text-emerald-500" />
+          <span className="label-mono text-xs tracking-widest uppercase font-semibold">The Solution</span>
+        </div>
+        <p className="text-xl md:text-2xl leading-relaxed text-foreground  tracking-tight font-normal">
+          {project.overview}
+        </p>
+      </div>
+
+    </div>
+    
+    {/* Project Image Viewport */}
+    <div className="border hairline border-[var(--color-hairline)] p-2 bg-surface/20 rounded-lg w-full aspect-video lg:aspect-[4/3] relative overflow-hidden group lg:sticky lg:top-24">
+      <img
+        src={projectImage}
+        alt={`${project.title} Interface`}
+        className="w-full h-full object-cover object-top rounded grayscale opacity-85 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+      />
+    </div>
+  </div>
+</Block>
 
       {/* STEP 2: Stack (Dynamic choices pulled straight out of your project array) */}
       <Block number="02" title="Stack">
         <div className="space-y-12 max-w-5xl">
           <div className="flex flex-wrap gap-3">
             {project.stack.map((s) => (
-              <span key={s} className="px-5 py-2.5 rounded-full border hairline border-[var(--color-hairline)] text-sm md:text-base font-light bg-surface/30">
+              <span
+                key={s}
+                className="px-5 py-2.5 rounded-full border hairline border-[var(--color-hairline)] text-sm md:text-base font-light bg-surface/30"
+              >
                 {s}
               </span>
             ))}
@@ -166,7 +189,7 @@ function ProjectDetail() {
             <div className="label-mono text-xs text-muted-foreground tracking-widest uppercase">
               Tech Stack Decisions
             </div>
-            
+
             <div className="grid md:grid-cols-2 gap-10 md:gap-16">
               {project.stackChoices?.map((choice, i) => (
                 <div key={i} className="space-y-3">
@@ -205,7 +228,9 @@ function ProjectDetail() {
         <div className="grid md:grid-cols-3 gap-px bg-[var(--color-hairline)] border hairline">
           {project.outcomes.map((o) => (
             <div key={o.label} className="bg-background p-8 md:p-10">
-              <div className="font-display text-4xl md:text-6xl tracking-tight font-medium text-foreground">{o.value}</div>
+              <div className="font-display text-4xl md:text-6xl tracking-tight font-medium text-foreground">
+                {o.value}
+              </div>
               <div className="label-mono text-muted-foreground mt-4">{o.label}</div>
             </div>
           ))}
@@ -221,9 +246,15 @@ function ProjectDetail() {
             className="group bg-background p-8 md:p-10 flex flex-col gap-3 hover:bg-surface transition-colors"
           >
             <span className="label-mono text-muted-foreground inline-flex items-center gap-2">
-              <Icon name="arrow_back" className="!text-base group-hover:-translate-x-1 transition-transform" /> Previous
+              <Icon
+                name="arrow_back"
+                className="!text-base group-hover:-translate-x-1 transition-transform"
+              />{" "}
+              Previous
             </span>
-            <span className="font-display text-2xl md:text-3xl leading-tight font-light">{prev.title}</span>
+            <span className="font-display text-2xl md:text-3xl leading-tight font-light">
+              {prev.title}
+            </span>
           </Link>
           <Link
             to="/projects/$slug"
@@ -231,9 +262,15 @@ function ProjectDetail() {
             className="group bg-background p-8 md:p-10 flex flex-col gap-3 md:items-end md:text-right hover:bg-surface transition-colors"
           >
             <span className="label-mono text-muted-foreground inline-flex items-center gap-2">
-              Next <Icon name="arrow_forward" className="!text-base group-hover:translate-x-1 transition-transform" />
+              Next{" "}
+              <Icon
+                name="arrow_forward"
+                className="!text-base group-hover:translate-x-1 transition-transform"
+              />
             </span>
-            <span className="font-display text-2xl md:text-3xl leading-tight font-light">{next.title}</span>
+            <span className="font-display text-2xl md:text-3xl leading-tight font-light">
+              {next.title}
+            </span>
           </Link>
         </div>
       </section>
@@ -258,14 +295,24 @@ function ProjectDetail() {
       <footer className="px-6 md:px-10 py-10 border-t hairline border-[var(--color-hairline)] label-mono text-muted-foreground">
         <div className="mx-auto max-w-7xl flex flex-col md:flex-row md:justify-between gap-3">
           <span>© 2026 Yahya Iraamane</span>
-          <Link to="/" className="hover:text-foreground">Back to portfolio →</Link>
+          <Link to="/" className="hover:text-foreground">
+            Back to portfolio →
+          </Link>
         </div>
       </footer>
     </div>
   );
 }
 
-function Block({ number, title, children }: { number: string; title: string; children: React.ReactNode }) {
+function Block({
+  number,
+  title,
+  children,
+}: {
+  number: string;
+  title: string;
+  children: React.ReactNode;
+}) {
   return (
     <section className="px-6 md:px-10 py-20 md:py-28 border-t hairline border-[var(--color-hairline)]">
       <div className="mx-auto max-w-7xl">
