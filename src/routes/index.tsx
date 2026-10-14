@@ -228,7 +228,7 @@ function Portfolio() {
               key={p.slug}
               to="/projects/$slug"
               params={{ slug: p.slug }}
-              className="group bg-background p-8 md:p-10 flex flex-col gap-6 hover:bg-surface transition-all duration-500 relative overflow-hidden"
+              className="group relative flex flex-col gap-6 overflow-hidden bg-background p-8 transition-all duration-500 hover:z-10 hover:-translate-y-1 hover:bg-surface hover:shadow-xl hover:shadow-accent/5 md:p-10"
             >
               <div className="flex items-center gap-2 flex-wrap">
                 {p.tags.map((t) => (

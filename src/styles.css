@@ -83,6 +83,33 @@
   ::selection { background: var(--color-foreground); color: var(--color-background); }
 }
 
+#top {
+  background-image:
+    radial-gradient(ellipse at 82% 24%, color-mix(in oklch, var(--accent) 12%, transparent), transparent 38%),
+    radial-gradient(ellipse at 12% 78%, oklch(0.72 0.08 175 / 0.07), transparent 36%);
+}
+
+#projects {
+  background-image:
+    radial-gradient(ellipse at 88% 10%, color-mix(in oklch, var(--accent) 8%, transparent), transparent 42%),
+    radial-gradient(circle at 1px 1px, color-mix(in oklch, var(--foreground) 5%, transparent) 1px, transparent 0);
+  background-size: auto, 20px 20px;
+}
+
+.project-detail-hero {
+  background-image:
+    radial-gradient(ellipse at 86% 22%, color-mix(in oklch, var(--accent) 11%, transparent), transparent 38%),
+    radial-gradient(ellipse at 12% 88%, oklch(0.72 0.08 175 / 0.06), transparent 34%);
+}
+
+.project-detail-section[data-section-number="02"],
+.project-detail-section[data-section-number="04"] {
+  background-image:
+    radial-gradient(ellipse at 92% 14%, color-mix(in oklch, var(--accent) 6%, transparent), transparent 42%),
+    radial-gradient(circle at 1px 1px, color-mix(in oklch, var(--foreground) 4%, transparent) 1px, transparent 0);
+  background-size: auto, 22px 22px;
+}
+
 @layer utilities {
   .font-display {
     font-family: var(--font-sans);
