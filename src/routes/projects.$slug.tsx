@@ -92,7 +92,7 @@ function ProjectDetail() {
   }, [project.slug]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background overflow-x-hidden">
+    <div className="project-detail-page min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background overflow-x-hidden">
       {/* Top bar */}
       <header className="fixed top-0 left-0 right-0 z-40 backdrop-blur-xl bg-background/70 border-b hairline border-[var(--color-hairline)]">
         <div className="mx-auto max-w-7xl px-6 md:px-10 h-14 flex items-center justify-between">
@@ -106,12 +106,23 @@ function ProjectDetail() {
             <span>/</span>
             <span className="text-foreground">{project.title}</span>
           </nav>
-          <ThemeToggle />
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <a
+              href="/Yahya-Iraamane-Full-Stack-Developer.pdf"
+              download="Yahya-Iraamane-Full-Stack-Developer.pdf"
+              className="inline-flex items-center gap-2 rounded-full border hairline px-3 py-1.5 text-[0.65rem] font-mono font-medium text-foreground hover:bg-foreground hover:text-background transition-all duration-300 active:scale-95 md:px-4 md:text-xs"
+            >
+              <Icon name="download" className="!text-base" />
+              <span className="hidden min-[380px]:inline">Download CV</span>
+              <span className="min-[380px]:hidden">CV</span>
+            </a>
+          </div>
         </div>
       </header>
 
       {/* Hero */}
-      <section className="px-6 md:px-10 pt-32 md:pt-44 pb-16 md:pb-24">
+      <section className="project-detail-hero px-6 md:px-10 pt-32 md:pt-44 pb-16 md:pb-24">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-wrap items-center gap-3 mb-8 animate-in fade-in slide-in-from-top-3 duration-700">
             {project.tags.map((t) => (
@@ -278,7 +289,7 @@ function ProjectDetail() {
       <Block number="03" title="Approach">
         <ol className="grid md:grid-cols-2 gap-px bg-[var(--color-hairline)] border hairline">
           {project.approach?.map((step, i) => (
-            <li key={i} className="bg-background p-6 md:p-8 flex gap-5">
+            <li key={i} className="group bg-background p-6 md:p-8 flex gap-5 transition-colors duration-300 hover:bg-surface/70">
               <span className="label-mono text-accent font-medium">0{i + 1}</span>
               <span className="text-foreground/85 leading-relaxed font-light text-sm md:text-base">
                 <strong className="font-medium text-foreground block mb-1 text-base font-display tracking-tight">
@@ -295,7 +306,7 @@ function ProjectDetail() {
       <Block number="04" title="Outcomes">
         <div className="grid md:grid-cols-3 gap-px bg-[var(--color-hairline)] border hairline">
           {project.outcomes.map((o) => (
-            <div key={o.label} className="bg-background p-8 md:p-10">
+            <div key={o.label} className="group bg-background p-8 md:p-10 transition-colors duration-300 hover:bg-surface/70">
               <div className="font-display text-4xl md:text-6xl tracking-tight font-medium text-foreground">
                 {o.value}
               </div>
@@ -417,7 +428,10 @@ function Block({
   const { ref, revealClass } = useScrollReveal();
 
   return (
-    <section className="px-6 md:px-10 py-20 md:py-28 border-t hairline border-[var(--color-hairline)]">
+    <section
+      data-section-number={number}
+      className="project-detail-section px-6 md:px-10 py-20 md:py-28 border-t hairline border-[var(--color-hairline)]"
+    >
       <div ref={ref} className={`mx-auto max-w-7xl ${revealClass}`}>
         <div className="label-mono text-muted-foreground mb-10 flex items-center gap-4">
           <span>{number}</span>
