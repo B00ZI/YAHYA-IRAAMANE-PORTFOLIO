@@ -298,12 +298,12 @@ function Portfolio() {
       </footer>
 
       {/* Mobile sticky floating nav */}
-      <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-foreground/95 text-background rounded-full px-2.5 py-2 flex items-center gap-1 shadow-2xl backdrop-blur-md transition-all duration-300 border border-background/10">
+      <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-sm bg-foreground/95 text-background rounded-full px-3 py-2 flex items-center justify-around gap-1 shadow-2xl backdrop-blur-md transition-all duration-300 border border-background/10">
         {NAV.map((n) => (
           <a
             key={n.id}
             href={`#${n.id}`}
-            className={`flex flex-col items-center px-3 py-1.5 rounded-full transition-all duration-300 ${
+            className={`flex flex-1 flex-col items-center px-3 py-1.5 rounded-full transition-all duration-300 ${
               active === n.id ? "bg-background text-foreground scale-105 shadow-sm font-medium" : "opacity-60 text-background"
             }`}
           >
