@@ -204,13 +204,37 @@ function ProjectDetail() {
             </div>
           </div>
 
-          {/* Project Image Viewport */}
-          <div className="border hairline border-[var(--color-hairline)] p-2 bg-surface/20 rounded-lg w-full aspect-video lg:aspect-[4/3] relative overflow-hidden group lg:sticky lg:top-24">
-            <img
-              src={projectImage}
-              alt={`${project.title} Interface`}
-              className="w-full h-full object-cover object-top rounded grayscale opacity-85 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-            />
+          {/* Live project preview */}
+          <div className="border hairline border-[var(--color-hairline)] p-2 bg-surface/20 rounded-lg w-full aspect-video relative overflow-hidden group lg:sticky lg:top-24">
+            {project.demoUrl ? (
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Open ${project.title} live site in a new tab`}
+                className="relative block h-full w-full overflow-hidden rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+              >
+                <img
+                  src={projectImage}
+                  alt={`${project.title} screenshot`}
+                  className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/5 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-100"
+                />
+                <span className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/55 px-4 py-2 text-sm font-mono text-white shadow-lg backdrop-blur-sm transition-colors group-hover:bg-black/75">
+                  Visit live site
+                  <Icon name="arrow_outward" className="!text-base" />
+                </span>
+              </a>
+            ) : (
+              <img
+                src={projectImage}
+                alt={`${project.title} screenshot`}
+                className="h-full w-full rounded object-cover object-top"
+              />
+            )}
           </div>
         </div>
       </Block>
