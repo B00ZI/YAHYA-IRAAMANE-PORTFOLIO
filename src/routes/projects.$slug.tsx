@@ -84,8 +84,6 @@ function ProjectDetail() {
   const next = PROJECTS[(idx + 1) % PROJECTS.length];
   const prev = PROJECTS[(idx - 1 + PROJECTS.length) % PROJECTS.length];
 
-  const demoUrl = "#";
-  const repoUrl = "https://github.com/BOOZI";
   const projectImage = `/images/projects/${project.slug}.png`;
 
   useEffect(() => {
@@ -134,22 +132,26 @@ function ProjectDetail() {
 
           {/* Action Buttons Strip */}
           <div className="mt-10 flex flex-wrap items-center gap-4 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-400 fill-mode-both">
-            <a
-              href={demoUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2.5 rounded-full bg-foreground text-background px-6 py-3 text-sm font-mono font-medium hover:opacity-90 transition-all hover:gap-3"
-            >
-              Launch Live Demo <Icon name="arrow_outward" className="!text-base" />
-            </a>
-            <a
-              href={repoUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2.5 rounded-full border hairline border-[var(--color-hairline)] px-6 py-3 text-sm font-mono text-foreground hover:bg-surface transition-colors"
-            >
-              Repository <Icon name="code" className="!text-base" />
-            </a>
+            {project.demoUrl && (
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2.5 rounded-full bg-foreground text-background px-6 py-3 text-sm font-mono font-medium hover:opacity-90 transition-all hover:gap-3"
+              >
+                Launch Live Demo <Icon name="arrow_outward" className="!text-base" />
+              </a>
+            )}
+            {project.repoUrl && (
+              <a
+                href={project.repoUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2.5 rounded-full border hairline border-[var(--color-hairline)] px-6 py-3 text-sm font-mono text-foreground hover:bg-surface transition-colors"
+              >
+                Repository <Icon name="code" className="!text-base" />
+              </a>
+            )}
           </div>
         </div>
       </section>

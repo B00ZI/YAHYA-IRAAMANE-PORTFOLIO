@@ -14,61 +14,80 @@ export type Project = {
   approach: { title: string; desc: string }[];
   outcomes: { label: string; value: string }[];
   stack: string[];
+  demoUrl?: string;
+  repoUrl?: string;
 };
 
 export const PROJECTS: Project[] = [
   {
-    slug: "school-management-saas",
-    tags: ["Laravel", "Next.js", "MySQL"],
-    title: "School Management SaaS Platform",
+    slug: "riadkit-guest-portal",
+    tags: ["Next.js", "Laravel", "TypeScript", "PHP", "QR"],
+    title: "RiadKit — Guest Portal & Management API",
     summary:
-      "I built a full-stack platform to handle school data, replace messy spreadsheets, and keep student, teacher, and admin data secure.",
+      "A split Next.js (TypeScript) frontend and Laravel 11 backend that helps small riad owners manage rooms, live reception tasks, and guest requests via QR-based guest sessions.",
     bullets: [
-      "Created independent dashboards for students, teachers, and admins with different access controls.",
-      "Designed a database with over 10 connected tables to keep track of attendance, grades, and payments smoothly.",
+      "Owner/staff REST API secured with Laravel Sanctum for multi-tenant riad management.",
+      "Public guest portal accessed via per-room QR tokens and a sticky session defense.",
+      "Live reception feed and room check-in/check-out flows to track occupancy and active guest sessions.",
+      "Menus, services, and excursions CRUD scoped per riad, with ordering through a session-validated guest endpoint.",
     ],
-    year: "2024",
+    year: "Not specified",
     role: "Full Stack Developer",
-    client: "Morocco-focused education provider",
-    status: "Production",
+    client: "Personal project / open-source",
+    status: "In development",
     overview:
-      "A complete web platform built for a school provider to manage daily workloads like recording attendance, organizing student profiles, and processing payments.",
+      "RiadKit is designed for small riads (guesthouses) to replace ad-hoc spreadsheets and fragmented guest workflows with a lightweight, secure web platform. The backend is a Laravel 11 REST API with protected endpoints for owners and reception staff, plus public guest-facing endpoints used by a Next.js frontend. Guests access an in-room portal by scanning a per-room QR token; staff use authenticated admin interfaces to manage rooms, check-ins, orders, and live requests.",
     challenge:
-      "The school relied heavily on slow, manual spreadsheets. They needed a secure, central system that could handle different user roles without getting messy or leaking sensitive student records.",
+      "The key challenges were tying guest sessions started by QR scans to the current room state, preventing stale session tokens from allowing orders after checkout, enforcing strict tenant isolation, keeping the live reception feed responsive, and separating owner/staff privileges from guest access.",
     stackChoices: [
       {
-        title: "Why Next.js + Headless Laravel?",
-        desc: "I used Laravel strictly as a backend API because it handles complex user roles and relational data out of the box. Pairing it with Next.js means the dashboard loads instantly for users without slowing down the server."
+        title: "Next.js + TypeScript for the guest UI",
+        desc: "Next.js and TypeScript provide a fast frontend with strong typing and a single-page guest experience. The portal uses a bootstrap endpoint to retrieve the data it needs and determine the interface state from the guest session status.",
       },
       {
-        title: "Why MySQL?",
-        desc: "Since school data (grades, attendance, payments) is highly structured and connects together, a classic relational database was the safest choice to keep everything accurate and synchronized."
-      }
+        title: "Laravel 11 for the API and tenant scoping",
+        desc: "Laravel provides the API framework, authentication with Sanctum, request validation, and database access. Protected queries are scoped to the authenticated user's riad_id.",
+      },
+      {
+        title: "Session-bound QR token pattern",
+        desc: "The API validates both the room's QR token and its current session_id. This prevents stale cookies from being reused after checkout and helps prevent orders from expired guest sessions.",
+      },
     ],
     approach: [
       {
-        title: "Data Isolation Middleware",
-        desc: "I wrote a check that runs on every single request to make sure a school can only see its own students, blocking any accidental data leaks between accounts."
+        title: "API-first architecture",
+        desc: "Backend endpoints serve both the owner/staff interface and guest portal, keeping business logic centralized and allowing different frontends to reuse the same API.",
       },
       {
-        title: "Custom Role System",
-        desc: "Built a permission rulebook that changes what you see based on who logs in—giving full control to admins, grading tools to teachers, and read-only views to parents."
+        title: "Role-based routes and strict scoping",
+        desc: "Protected owner/staff routes require Sanctum authentication, while guest endpoints are public. Protected room, reception, menu, service, and excursion queries are scoped by riad_id.",
       },
       {
-        title: "Relational Data Mapping",
-        desc: "Linked tables carefully so when a teacher marks a student absent, it instantly updates the attendance summary and reports without breaking other logs."
+        title: "Single bootstrap endpoint for the guest portal",
+        desc: "A guest portal endpoint returns room, menu, service, and excursion data along with session status so the frontend can determine whether ordering is available.",
       },
       {
-        title: "Background Report Processing",
-        desc: "Generating huge report PDFs can freeze the app. I moved this work to a background queue so users can keep clicking around while the files build."
-      }
+        title: "Server-side validation of guest requests",
+        desc: "Guest requests require both the QR token and a matching session_id. The backend rejects requests when the session no longer matches the room's active session.",
+      },
     ],
     outcomes: [
-      { label: "Database Tables", value: "10+" },
-      { label: "Lighthouse Score", value: "90+" },
-      { label: "Core Systems", value: "Attendance, Grades, Payments" },
+      { label: "Repository", value: "github.com/B00ZI/riadkit" },
+      { label: "Demo", value: "Not available" },
+      { label: "Verified metrics", value: "Not available" },
     ],
-    stack: ["Laravel", "Next.js", "MySQL", "RESTful APIs", "TailwindCSS"],
+    stack: [
+      "TypeScript",
+      "Next.js",
+      "React",
+      "PHP",
+      "Laravel 11",
+      "Laravel Sanctum",
+      "REST API",
+      "QR token-based guest sessions",
+      "Session validation / Sticky Token Defense",
+    ],
+    repoUrl: "https://github.com/B00ZI/riadkit",
   },
   {
     slug: "ai-change-order-system",
