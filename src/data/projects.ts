@@ -22,59 +22,59 @@ export const PROJECTS: Project[] = [
   {
     slug: "riadkit-guest-portal",
     tags: ["Next.js", "Laravel", "TypeScript", "PHP", "QR"],
-    title: "RiadKit — Guest Portal & Management API",
+    title: "RiadKit — Riad Guest Platform",
     summary:
-      "A split Next.js (TypeScript) frontend and Laravel 11 backend that helps small riad owners manage rooms, live reception tasks, and guest requests via QR-based guest sessions.",
+      "A guest portal and management API for small riads, connecting QR-based room access with staff tools for rooms, services, and guest requests.",
     bullets: [
-      "Owner/staff REST API secured with Laravel Sanctum for multi-tenant riad management.",
-      "Public guest portal accessed via per-room QR tokens and a sticky session defense.",
-      "Live reception feed and room check-in/check-out flows to track occupancy and active guest sessions.",
-      "Menus, services, and excursions CRUD scoped per riad, with ordering through a session-validated guest endpoint.",
+      "Separate authenticated tools for owners and staff, with data scoped to each riad.",
+      "Room-specific QR codes open a guest portal for available menus, services, and excursions.",
+      "Check-in and check-out flows manage room occupancy and active guest sessions.",
+      "Guest requests are accepted only when the room's QR token and active session match.",
     ],
     year: "Not specified",
     role: "Full Stack Developer",
-    client: "Personal project / open-source",
+    client: "Personal project",
     status: "In development",
     overview:
-      "RiadKit is designed for small riads (guesthouses) to replace ad-hoc spreadsheets and fragmented guest workflows with a lightweight, secure web platform. The backend is a Laravel 11 REST API with protected endpoints for owners and reception staff, plus public guest-facing endpoints used by a Next.js frontend. Guests access an in-room portal by scanning a per-room QR token; staff use authenticated admin interfaces to manage rooms, check-ins, orders, and live requests.",
+      "RiadKit brings guest services and reception tasks into one web platform for small riads. Staff manage rooms and guest activity through an authenticated interface, while guests scan a room QR code to view services and send requests.",
     challenge:
-      "The key challenges were tying guest sessions started by QR scans to the current room state, preventing stale session tokens from allowing orders after checkout, enforcing strict tenant isolation, keeping the live reception feed responsive, and separating owner/staff privileges from guest access.",
+      "Guest access needs to follow the room's current stay: a session that remains on a guest's device after checkout must not authorize new requests. The platform also needs to keep each riad's management data separate and limit staff and guest access to the right features.",
     stackChoices: [
       {
-        title: "Next.js + TypeScript for the guest UI",
-        desc: "Next.js and TypeScript provide a fast frontend with strong typing and a single-page guest experience. The portal uses a bootstrap endpoint to retrieve the data it needs and determine the interface state from the guest session status.",
+        title: "Next.js and TypeScript for the portal",
+        desc: "The guest-facing frontend uses Next.js and TypeScript. A portal bootstrap request returns the room's services and session status so the interface can reflect whether the guest can place a request.",
       },
       {
-        title: "Laravel 11 for the API and tenant scoping",
-        desc: "Laravel provides the API framework, authentication with Sanctum, request validation, and database access. Protected queries are scoped to the authenticated user's riad_id.",
+        title: "Laravel 11 for the management API",
+        desc: "The Laravel REST API handles staff authentication with Sanctum, request validation, and management endpoints. Protected data queries are scoped to the authenticated user's riad.",
       },
       {
-        title: "Session-bound QR token pattern",
-        desc: "The API validates both the room's QR token and its current session_id. This prevents stale cookies from being reused after checkout and helps prevent orders from expired guest sessions.",
+        title: "QR codes tied to active guest sessions",
+        desc: "Guest requests must include the room's QR token and its current session identifier. The API rejects requests when that identifier no longer matches the room's active session.",
       },
     ],
     approach: [
       {
-        title: "API-first architecture",
-        desc: "Backend endpoints serve both the owner/staff interface and guest portal, keeping business logic centralized and allowing different frontends to reuse the same API.",
+        title: "Separate staff and guest access",
+        desc: "Authenticated management routes serve owners and staff, while a separate set of endpoints supports the public guest portal.",
       },
       {
-        title: "Role-based routes and strict scoping",
-        desc: "Protected owner/staff routes require Sanctum authentication, while guest endpoints are public. Protected room, reception, menu, service, and excursion queries are scoped by riad_id.",
+        title: "Scope management data by riad",
+        desc: "Protected room, reception, menu, service, and excursion operations are restricted to the authenticated user's riad.",
       },
       {
-        title: "Single bootstrap endpoint for the guest portal",
-        desc: "A guest portal endpoint returns room, menu, service, and excursion data along with session status so the frontend can determine whether ordering is available.",
+        title: "Load the guest portal in one request",
+        desc: "The portal endpoint returns room details, menus, services, excursions, and session status for the frontend.",
       },
       {
-        title: "Server-side validation of guest requests",
-        desc: "Guest requests require both the QR token and a matching session_id. The backend rejects requests when the session no longer matches the room's active session.",
+        title: "Validate requests against the active stay",
+        desc: "The API checks the QR token and current session before accepting guest requests, rejecting requests tied to an expired session.",
       },
     ],
     outcomes: [
-      { label: "Repository", value: "github.com/B00ZI/riadkit" },
-      { label: "Demo", value: "Not available" },
-      { label: "Verified metrics", value: "Not available" },
+      { label: "Guest Experience", value: "QR Guest Portal" },
+      { label: "Reception Workflow", value: "Room Check-in/out" },
+      { label: "Request Security", value: "Active Session Checks" },
     ],
     stack: [
       "TypeScript",
@@ -87,6 +87,7 @@ export const PROJECTS: Project[] = [
       "QR token-based guest sessions",
       "Session validation / Sticky Token Defense",
     ],
+    demoUrl: "https://b00zi.github.io/riadkit-landingpage/",
     repoUrl: "https://github.com/B00ZI/riadkit",
   },
   {
@@ -141,6 +142,8 @@ export const PROJECTS: Project[] = [
       { label: "Main Feature", value: "Status & Notifications" },
     ],
     stack: ["Next.js", "Laravel", "PostgreSQL", "AI APIs", "REST APIs"],
+    demoUrl: "https://scopegurde.vercel.app/",
+    repoUrl: "https://github.com/B00ZI/scopegurde",
   },
   {
     slug: "ai-kanban-workflow",
@@ -194,6 +197,8 @@ export const PROJECTS: Project[] = [
       { label: "Data Saving", value: "Local Storage" },
     ],
     stack: ["Next.js", "JavaScript", "Local Storage", "TailwindCSS"],
+    demoUrl: "https://chat2-canvas.vercel.app/",
+    repoUrl: "https://github.com/B00ZI/Chat2Canvas",
   },
   {
     slug: "movie-management-app",
@@ -247,6 +252,8 @@ export const PROJECTS: Project[] = [
       { label: "App Speed", value: "Cached & Lazy-loaded" },
     ],
     stack: ["React.js", "Supabase", "External Movie API", "JavaScript"],
+    demoUrl: "https://cine-scope-nu-three.vercel.app/",
+    repoUrl: "https://github.com/B00ZI/CineScope",
   },
 ];
 
